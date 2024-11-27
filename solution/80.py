@@ -1,15 +1,14 @@
 def solution(amount):
-  denominations = [1, 10, 50, 100]
-  denominations.sort(reverse=True)  # ❶  화폐 단위를 큰 순서대로 정렬
-
-  change = []  # ❷ 거스름돈을 담을 리스트
-
+  denominations = [100, 50, 10, 1]  
+  change = []  
   for coin in denominations:
-    while amount >= coin:  # ❸ 해당 화폐 단위로 거스름돈을 계속 나눠줌
-      change.append(coin)  # ❹ 거스름돈 리스트 업데이트
-      amount -= coin  # ❺ 정산이 완료된 거스름돈 뺌
-  # ❻ 거스름돈 리스트 반환
+    # ❶ 현재 화폐 단위로 최대한 거슬러 줄 수 있는 동전의 갯수 구함
+    count = amount // coin  
+    change.extend([coin] * count)
+    # ❷ 정산이 완료된 거스름돈을 제외함
+    amount %= coin  
   return change
+
 
 
 # TEST 코드 입니다. 주석을 풀고 실행시켜보세요
